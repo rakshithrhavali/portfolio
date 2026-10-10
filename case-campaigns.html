@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Case Study — Sport Campaign Creative · Rakshith Havali</title>
+<meta name="description" content="Match-day creative and sponsorship decks for cricket's biggest tournaments — IPL, PSL, Asia Cup, Rugby World Cup — produced on deadlines measured in overs." />
+<meta name="theme-color" content="#FDFCFB" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Creative for a billion cricket fans" />
+<meta property="og:description" content="A campaign creative case study — high-volume, high-pressure design for the loudest rooms in sport." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231D1D1B'/%3E%3Ctext x='32' y='44' font-family='Arial, sans-serif' font-size='34' font-weight='700' fill='%23FFFFFF' text-anchor='middle'%3ER%3C/text%3E%3Ccircle cx='47' cy='44' r='4' fill='%23F4A949'/%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #FFFFFF; --bg-soft: #F6F5F2; --fg: #161616; --fg-soft: #3D3D3B;
+    --muted: #71716C; --faint: #B9B9B4; --border: #E6E5E1; --ink: #1D1D1B;
+    --orange: #F4A949; --orange-soft: #FBE5C4; --blue: #7CB9F2; --blue-soft: #DCEBFB;
+    --purple: #A89BF0; --purple-soft: #E6E2FA; --pink: #E89FE3; --pink-soft: #F8E2F6;
+    --teal: #8ED1C2; --yellow: #F2D06B;
+    --accent: var(--purple); --accent-soft: var(--purple-soft); --accent-ink: #5B4BC4;
+    --font-head: 'Space Grotesk', sans-serif; --font-body: 'Archivo', sans-serif;
+    --radius: 6px; --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--bg); color: var(--fg); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  h1, h2, h3 { font-family: var(--font-head); line-height: 1.1; }
+  a { color: inherit; text-decoration: none; }
+  a, button { cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+  .skip-link { position: absolute; left: -9999px; top: 0; background: var(--ink); color: #fff; padding: 12px 20px; z-index: 300; border-radius: 0 0 8px 0; }
+  .skip-link:focus { left: 0; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .narrow { max-width: 760px; }
+
+  .progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--ink); transform-origin: 0 50%; transform: scaleX(0); z-index: 200; }
+
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: background 300ms var(--ease), border-color 300ms var(--ease); border-bottom: 1px solid transparent; }
+  .nav.scrolled { background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom-color: var(--border); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .nav-logo { font-family: var(--font-head); font-weight: 700; font-size: 18px; letter-spacing: -0.02em; color: var(--fg); }
+  .nav-logo span { color: var(--accent); display: inline-block; transition: transform 300ms var(--ease); }
+  .nav-logo:hover span { transform: translateY(-4px); }
+  .nav-back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-head); font-size: 14px; font-weight: 600; color: var(--fg-soft); padding: 10px 16px; border: 1px solid var(--border); border-radius: 999px; transition: border-color 200ms var(--ease), color 200ms var(--ease), transform 200ms var(--ease); }
+  .nav-back:hover { border-color: var(--ink); color: var(--fg); transform: translateX(-3px); }
+  .nav-back svg { width: 16px; height: 16px; }
+
+  .case-hero { position: relative; overflow: hidden; padding: 150px 0 72px;
+    background:
+      radial-gradient(60% 90% at 15% 15%, var(--accent-soft) 0%, transparent 60%),
+      radial-gradient(55% 80% at 90% 5%, rgba(232,159,227,0.4) 0%, transparent 62%),
+      radial-gradient(50% 70% at 70% 60%, rgba(165,204,245,0.45) 0%, transparent 65%),
+      #FDFCFB; }
+  .case-hero::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"); opacity: 0.05; pointer-events: none; }
+  .shard-wrap { position: absolute; pointer-events: none; }
+  .shard { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.08)); border: 1px solid rgba(255,255,255,0.5); transform: skewX(-14deg); }
+  .sw-1 { width: 180px; height: 420px; top: -70px; right: 14%; } .sw-1 .shard { animation: float 14s ease-in-out infinite alternate; }
+  .sw-2 { width: 130px; height: 320px; top: 30px; right: 3%; } .sw-2 .shard { animation: float 18s ease-in-out infinite alternate-reverse; }
+  @keyframes float { from { transform: skewX(-14deg) translateY(0); } to { transform: skewX(-14deg) translateY(40px); } }
+  @media (max-width: 700px) { .sw-1 { display: none; } }
+  .case-hero .container { position: relative; z-index: 1; }
+  .case-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 22px; }
+  .case-eyebrow::before { content: ''; width: 30px; height: 2px; background: var(--accent); border-radius: 2px; }
+  .case-hero h1 { font-size: clamp(34px, 6vw, 66px); font-weight: 700; letter-spacing: -0.03em; max-width: 16ch; margin-bottom: 24px; }
+  .case-deck { font-size: clamp(17px, 2.2vw, 21px); color: var(--fg-soft); max-width: 60ch; margin-bottom: 44px; }
+  .case-meta { display: grid; grid-template-columns: repeat(4, auto); gap: 40px; padding-top: 28px; border-top: 1px solid var(--border); width: fit-content; }
+  @media (max-width: 640px) { .case-meta { grid-template-columns: 1fr 1fr; gap: 24px 40px; } }
+  .case-meta dt { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .case-meta dd { font-family: var(--font-head); font-size: 16px; font-weight: 600; color: var(--fg); }
+
+  main { padding: 84px 0 40px; }
+  .block { margin-bottom: 72px; }
+  .block:last-child { margin-bottom: 0; }
+  .kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 16px; }
+  .kicker::before { content: '→'; color: var(--accent); }
+  .block h2 { font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 20px; }
+  .block p { color: var(--fg-soft); font-size: 17px; margin-bottom: 16px; }
+  .block p:last-child { margin-bottom: 0; }
+  .lead { font-family: var(--font-head); font-size: clamp(19px, 2.4vw, 25px); font-weight: 500; line-height: 1.45; color: var(--fg); letter-spacing: -0.01em; }
+
+  .steps { list-style: none; counter-reset: s; display: grid; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .steps li { counter-increment: s; background: #fff; padding: 24px 26px; display: grid; grid-template-columns: 54px 1fr; gap: 8px 20px; align-items: start; transition: background 200ms var(--ease); }
+  .steps li:hover { background: var(--bg-soft); }
+  .steps li::before { content: counter(s, decimal-leading-zero); font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--accent-ink); grid-row: 1 / span 2; padding-top: 3px; }
+  .steps h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+  .steps p { font-size: 15px; color: var(--muted); margin: 0; }
+
+  .roster { display: flex; flex-wrap: wrap; gap: 10px; }
+  .roster span { font-family: var(--font-head); font-size: 14.5px; font-weight: 500; color: var(--fg-soft); background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 20px; transition: border-color 200ms var(--ease), color 200ms var(--ease), transform 200ms var(--ease); }
+  .roster span:hover { border-color: var(--ink); color: var(--fg); transform: translateY(-2px); }
+
+  .outcome-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 700px) { .outcome-grid { grid-template-columns: 1fr; } }
+  .outcome { background: var(--accent-soft); border-radius: var(--radius); padding: 28px 26px; }
+  .outcome b { display: block; font-family: var(--font-head); font-size: clamp(30px, 4vw, 40px); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 8px; }
+  .outcome span { font-size: 14.5px; color: rgba(22,22,22,0.75); }
+
+  .pullquote { border-left: 3px solid var(--accent); padding: 6px 0 6px 28px; font-family: var(--font-head); font-size: clamp(20px, 2.8vw, 28px); font-weight: 500; line-height: 1.4; letter-spacing: -0.015em; color: var(--fg); }
+
+  .next { border-top: 1px solid var(--border); margin-top: 20px; }
+  .next a { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 56px 0; transition: padding 250ms var(--ease); }
+  .next a:hover { padding-left: 10px; }
+  .next .next-label { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .next h3 { font-size: clamp(22px, 3.2vw, 32px); font-weight: 700; letter-spacing: -0.02em; }
+  .next .arrow { flex: none; width: 52px; height: 52px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; transition: transform 250ms var(--ease); }
+  .next a:hover .arrow { transform: translateX(6px); }
+  .next .arrow svg { width: 20px; height: 20px; }
+
+  .footer-line { border-top: 1px solid var(--border); padding: 28px 0 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13.5px; color: var(--muted); }
+
+  .to-top { position: fixed; right: 24px; bottom: 24px; z-index: 80; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity 300ms var(--ease), transform 300ms var(--ease); }
+  .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+  .to-top svg { width: 19px; height: 19px; }
+
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 600ms var(--ease), transform 600ms var(--ease); transition-delay: var(--d, 0ms); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<nav class="nav" id="nav" aria-label="Primary">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">Rakshith<span>.</span></a>
+    <a href="index.html#work" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      All work
+    </a>
+  </div>
+</nav>
+
+<header class="case-hero">
+  <div class="shard-wrap sw-1" aria-hidden="true"><div class="shard"></div></div>
+  <div class="shard-wrap sw-2" aria-hidden="true"><div class="shard"></div></div>
+  <div class="container">
+    <p class="case-eyebrow">ITW · Campaign Creative</p>
+    <h1>Creative for a billion cricket fans</h1>
+    <p class="case-deck">Match-day creative and sponsorship decks for the loudest rooms in sport — IPL, PSL, Asia Cup, the Rugby World Cup — turned around on deadlines measured in overs. This is where I learned to make complex things look effortless, fast.</p>
+    <dl class="case-meta">
+      <div><dt>Role</dt><dd>Sr. Creative Executive</dd></div>
+      <div><dt>Timeline</dt><dd>2017 — 2020</dd></div>
+      <div><dt>Industry</dt><dd>Sport / Media</dd></div>
+      <div><dt>Output</dt><dd>15+ campaigns</dd></div>
+    </dl>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container narrow">
+    <section class="block reveal">
+      <p class="lead">When the audience is measured in the hundreds of millions and the deadline is measured in overs, there's no room to be precious. The work has to be sharp, on-brand, and out the door.</p>
+    </section>
+
+    <section class="block reveal">
+      <p class="kicker">The challenge</p>
+      <h2>Enormous stakes, impossible clock</h2>
+      <p>Live sport doesn't wait. A match generates moments by the minute, and each one is a chance for a brand to show up — but only if the creative is ready before the moment passes. Multiply that across simultaneous tournaments, multiple sponsors, and every social format, and volume becomes the real design problem.</p>
+      <p>The trap is obvious: speed at the cost of quality, or quality at the cost of the deadline. The job was to refuse that trade-off.</p>
+    </section>
+
+    <section class="block reveal">
+      <p class="kicker">The approach</p>
+      <h2>Systemise the speed</h2>
+      <ol class="steps">
+        <li><h3>Template the repeatable</h3><p>Built flexible, on-brand creative systems for the formats that recur every match — so each asset started at 70%, not zero.</p></li>
+        <li><h3>Protect the brand</h3><p>Locked the non-negotiables — logo, colour, type, clear space — so speed never turned into brand drift across sponsors.</p></li>
+        <li><h3>Turn it around live</h3><p>Produced match-day creative and social content against real-time results, on deadlines that left no room for a second pass.</p></li>
+        <li><h3>Pitch the partnership</h3><p>Designed sponsorship and sales decks that helped close brand partnerships for events around the world.</p></li>
+      </ol>
+    </section>
+
+    <section class="block reveal">
+      <p class="pullquote">Speed at the cost of quality, or quality at the cost of the deadline — the job was to refuse that trade-off.</p>
+    </section>
+
+    <section class="block reveal">
+      <p class="kicker">The roster</p>
+      <h2>Where the work ran</h2>
+      <div class="roster">
+        <span>IPL 2020</span><span>PSL 2018–2020</span><span>Asia Cup 2018</span><span>Rugby World Cup</span><span>Mzansi Super League</span><span>Emirates D10</span><span>SriLankan Airlines</span><span>Wisden India</span><span>Mayweather v McGregor</span><span>Mysuru Warriors</span>
+      </div>
+    </section>
+
+    <section class="block reveal">
+      <p class="kicker">The outcome</p>
+      <h2>Proof under pressure</h2>
+      <div class="outcome-grid">
+        <div class="outcome"><b>15+</b><span>global campaigns across cricket, rugby and boxing</span></div>
+        <div class="outcome"><b>Millions</b><span>the audience each match-day asset reached</span></div>
+        <div class="outcome"><b>Overs</b><span>the turnaround the work had to survive</span></div>
+      </div>
+    </section>
+
+    <section class="block reveal">
+      <p class="block-tail" style="font-size:17px;color:var(--fg-soft)">It's a different world from healthcare software — but the muscle is the same. Take something huge and chaotic, and make it land clean and fast. That's the thread running through everything I design.</p>
+    </section>
+  </div>
+
+  <div class="container">
+    <nav class="next" aria-label="Next case study">
+      <a href="case-design-systems.html">
+        <span>
+          <span class="next-label">Next case study</span>
+          <h3>One design language across every healthcare platform</h3>
+        </span>
+        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+    </nav>
+    <div class="footer-line">
+      <span>© 2026 Rakshith Havali · Bengaluru, India</span>
+      <a href="index.html#work" style="color:var(--fg-soft)">← Back to all work</a>
+    </div>
+  </div>
+</main>
+
+<button class="to-top" id="to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav = document.getElementById('nav');
+  var progress = document.getElementById('progress');
+  var toTop = document.getElementById('to-top');
+  var ticking = false;
+  function onScroll() {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+    if (toTop) toTop.classList.toggle('show', window.scrollY > 600);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
+  onScroll();
+  var targets = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)) {
+    targets.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach(function (el) { io.observe(el); });
+  }
+  if (toTop) toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); });
+})();
+</script>
+</body>
+</html>
