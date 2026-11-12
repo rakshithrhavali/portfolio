@@ -34,8 +34,9 @@
   :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
   .skip-link { position: absolute; left: -9999px; top: 0; background: var(--ink); color: #fff; padding: 12px 20px; z-index: 300; border-radius: 0 0 8px 0; }
   .skip-link:focus { left: 0; }
-  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-  .narrow { max-width: 760px; }
+  /* one centered column: content is at most 960px wide, plus the side gutters */
+  .container { max-width: calc(960px + 2 * clamp(24px, 4vw, 64px)); margin: 0 auto; padding: 0 clamp(24px, 4vw, 64px); }
+  .narrow > * { max-width: 720px; }
 
   .progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--ink); transform-origin: 0 50%; transform: scaleX(0); z-index: 200; }
 
@@ -45,8 +46,8 @@
   .nav-logo { font-family: var(--font-head); font-weight: 700; font-size: 18px; letter-spacing: -0.02em; color: var(--fg); }
   .nav-logo span { color: var(--accent); display: inline-block; transition: transform 300ms var(--ease); }
   .nav-logo:hover span { transform: translateY(-4px); }
-  .nav-back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-head); font-size: 14px; font-weight: 600; color: var(--fg-soft); padding: 10px 16px; border: 1px solid var(--border); border-radius: 999px; transition: border-color 200ms var(--ease), color 200ms var(--ease), transform 200ms var(--ease); }
-  .nav-back:hover { border-color: var(--ink); color: var(--fg); transform: translateX(-3px); }
+  .nav-back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-head); font-size: 14px; font-weight: 600; color: var(--fg-soft); padding: 10px 4px; transition: color 200ms var(--ease), transform 200ms var(--ease); }
+  .nav-back:hover { color: var(--fg); transform: translateX(-3px); }
   .nav-back svg { width: 16px; height: 16px; }
 
   .case-hero { position: relative; overflow: hidden; padding: 150px 0 72px;
@@ -83,8 +84,7 @@
   .lead { font-family: var(--font-head); font-size: clamp(19px, 2.4vw, 25px); font-weight: 500; line-height: 1.45; color: var(--fg); letter-spacing: -0.01em; }
 
   .steps { list-style: none; counter-reset: s; display: grid; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .steps li { counter-increment: s; background: #fff; padding: 24px 26px; display: grid; grid-template-columns: 54px 1fr; gap: 8px 20px; align-items: start; transition: background 200ms var(--ease); }
-  .steps li:hover { background: var(--bg-soft); }
+  .steps li { counter-increment: s; background: #fff; padding: 24px 26px; display: grid; grid-template-columns: 54px 1fr; gap: 8px 20px; align-items: start; }
   .steps li::before { content: counter(s, decimal-leading-zero); font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--accent-ink); grid-row: 1 / span 2; padding-top: 3px; }
   .steps h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
   .steps p { font-size: 15px; color: var(--muted); margin: 0; }
@@ -103,7 +103,6 @@
 
   .next { border-top: 1px solid var(--border); margin-top: 20px; }
   .next a { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 56px 0; transition: padding 250ms var(--ease); }
-  .next a:hover { padding-left: 10px; }
   .next .next-label { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
   .next h3 { font-size: clamp(22px, 3.2vw, 32px); font-weight: 700; letter-spacing: -0.02em; }
   .next .arrow { flex: none; width: 52px; height: 52px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; transition: transform 250ms var(--ease); }
@@ -112,9 +111,6 @@
 
   .footer-line { border-top: 1px solid var(--border); padding: 28px 0 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13.5px; color: var(--muted); }
 
-  .to-top { position: fixed; right: 24px; bottom: 24px; z-index: 80; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity 300ms var(--ease), transform 300ms var(--ease); }
-  .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
-  .to-top svg { width: 19px; height: 19px; }
 
   .reveal { opacity: 0; transform: translateY(26px); transition: opacity 600ms var(--ease), transform 600ms var(--ease); transition-delay: var(--d, 0ms); }
   .reveal.in { opacity: 1; transform: none; }
@@ -124,6 +120,106 @@
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     .reveal { opacity: 1; transform: none; }
   }
+
+  /* steps: no hover (they are not links); stack the number on phones */
+  @media (max-width: 560px) {
+    .steps li { grid-template-columns: 1fr; gap: 6px; padding: 22px 20px; }
+    .steps li::before { grid-row: auto; padding-top: 0; }
+  }
+
+  /* previous / next case study */
+  .next { display: grid; grid-template-columns: 1fr 1fr; }
+  .next a { padding: 48px 0; }
+  .next a.prev { justify-content: flex-start; padding-right: 24px; border-right: 1px solid var(--border); }
+  .next a.fwd { padding-left: 24px; }
+  .next a.fwd > span:first-child { flex: 1; }
+  .next h3 { font-size: clamp(18px, 2.2vw, 24px); }
+  .next a.prev:hover .arrow { transform: translateX(-6px); }
+  @media (max-width: 700px) {
+    .next a { display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; align-content: start; column-gap: 6px; row-gap: 14px; padding: 28px 0; }
+    .next a > span:not(.arrow) { display: contents; }
+    .next a.prev { padding-right: 16px; }
+    .next a.prev .arrow { grid-column: 1; grid-row: 1; }
+    .next a.prev .next-label { grid-column: 2; grid-row: 1; }
+    .next a.fwd { grid-template-columns: minmax(0,1fr) auto; padding-left: 16px; text-align: right; }
+    .next a.fwd .arrow { grid-column: 2; grid-row: 1; }
+    .next a.fwd .next-label { grid-column: 1; grid-row: 1; }
+    .next h3 { grid-column: 1 / -1; grid-row: 2; font-size: 15px; line-height: 1.35; }
+    .next .arrow { width: 36px; height: 36px; }
+    .next .arrow svg { width: 16px; height: 16px; }
+    .next .next-label { font-size: 11px; letter-spacing: 0.1em; margin-bottom: 0; }
+  }
+
+  /* closing call to action */
+  .cta { background: var(--accent-soft); border-radius: var(--radius); padding: 36px 34px; }
+  .cta h2 { font-size: clamp(22px, 3vw, 28px); margin-bottom: 10px; }
+  .cta p { color: rgba(22,22,22,0.75); margin-bottom: 22px; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .cta-actions a { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-head); font-size: 15px; font-weight: 600; padding: 13px 22px; border-radius: var(--radius); border: 1px solid var(--ink); transition: background 200ms var(--ease), color 200ms var(--ease); }
+  .cta-actions a.primary { background: var(--ink); color: #fff; }
+  .cta-actions a.primary:hover { background: #000; }
+  .cta-actions a:not(.primary):hover { background: var(--ink); color: #fff; }
+  .cta-actions svg { width: 17px; height: 17px; }
+  @media (max-width: 560px) { .cta { padding: 28px 22px; } }
+
+  /* illustrative figures */
+  .fig { margin-top: 28px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+  .fig figcaption { font-size: 13px; color: var(--muted); margin-top: 18px; }
+  @media (max-width: 560px) { .fig { padding: 20px 16px; } }
+
+  .fmt { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: end; }
+  @media (max-width: 640px) { .fmt { grid-template-columns: 1fr 1fr; } }
+  .fmt-item { display: flex; flex-direction: column; gap: 8px; }
+  .fmt-art { position: relative; background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .fmt-art::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 38%; background: linear-gradient(135deg, var(--accent-soft), var(--pink-soft)); }
+  .fmt-art .sc { position: absolute; left: 8%; right: 8%; top: 44%; height: 9%; min-height: 8px; border-radius: 3px; background: var(--ink); }
+  .fmt-art .hl { position: absolute; left: 8%; width: 60%; top: 58%; height: 6%; min-height: 5px; border-radius: 3px; background: #D5D4CF; }
+  .fmt-art .sp { position: absolute; right: 8%; bottom: 7%; width: 22%; height: 8%; min-height: 6px; border-radius: 3px; background: var(--accent); }
+  .fmt-item span { font-size: 12.5px; color: var(--muted); }
+  .fmt-item b { font-family: var(--font-head); font-size: 13.5px; color: var(--fg); font-weight: 600; }
+  .fmt-lock { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; font-size: 13px; color: var(--fg-soft); }
+  .fmt-lock em { font-style: normal; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 4px 11px; }
+  /* 12 column grid for the hero (desktop) */
+  @media (min-width: 1024px) {
+    .case-hero .container { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; }
+    :where(.case-hero .container) > * { grid-column: 1 / -1; justify-self: start; }
+    .case-hero h1 { grid-column: 1 / span 9; max-width: 18ch; }
+    .case-deck { grid-column: 1 / span 9; max-width: none; }
+    .case-meta { justify-self: stretch; width: auto; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 24px; }
+    .narrow > * { max-width: none; }
+  }
+  /* journey: site links in the nav, on-page jump links, copy email, footer links */
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .nav-links { display: flex; gap: 4px; list-style: none; }
+  .nav-links a { display: inline-block; padding: 10px 12px; font-size: 14px; font-weight: 500; color: var(--fg-soft); transition: color 200ms var(--ease); }
+  .nav-links a:hover { color: var(--fg); }
+  .nav-links a.nav-cta { margin-left: 8px; padding: 9px 18px; border: 1px solid var(--ink); border-radius: 999px; color: var(--fg); transition: background 200ms var(--ease), color 200ms var(--ease); }
+  .nav-links a.nav-cta:hover { background: var(--ink); color: #fff; }
+  @media (max-width: 760px) { .nav-links li:not(:last-child) { display: none; } .nav-links a.nav-cta { margin-left: 0; } }
+  /* on this page: plain text links. A row above the content on small screens, a sticky side column on desktop */
+  .case-aside { margin-bottom: 48px; }
+  .toc { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 20px; }
+  .toc-label { flex-basis: 100%; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .toc a { font-size: 15px; font-weight: 500; padding: 8px 0; color: var(--fg-soft); text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: color 200ms var(--ease), text-decoration-color 200ms var(--ease); }
+  .toc a:hover, .toc a[aria-current="true"] { color: var(--fg); text-decoration-color: currentColor; }
+  @media (min-width: 1024px) {
+    .case-layout { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); column-gap: 64px; align-items: start; }
+    .case-content { grid-column: 1; grid-row: 1; }
+    .case-aside { grid-column: 2; grid-row: 1; position: sticky; top: 112px; margin-bottom: 0; }
+    .toc { flex-direction: column; align-items: flex-start; gap: 0; border-left: 1px solid var(--border); padding-left: 20px; }
+    .toc a { position: relative; padding: 7px 0; }
+    .toc a[aria-current="true"]::before { content: ""; position: absolute; left: -21px; top: 6px; bottom: 6px; width: 2px; background: var(--ink); }
+  }
+  .block { scroll-margin-top: 96px; }
+  .cta-actions button { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-head); font-size: 15px; line-height: 1.6; font-weight: 600; padding: 13px 22px; border-radius: var(--radius); border: 1px solid var(--ink); background: transparent; color: var(--fg); transition: background 200ms var(--ease), color 200ms var(--ease); }
+  .cta-actions button:hover { background: var(--ink); color: #fff; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
+  .footer-links a { color: var(--fg-soft); }
+  .footer-links a:hover { color: var(--fg); }
+  @media (max-width: 640px) { .footer-links a { display: inline-block; padding: 11px 0; } }
+  @media (max-width: 480px) { .cta-actions > * { flex: 1 1 100%; justify-content: center; } }
+  .ext { margin-left: 4px; font-size: 0.85em; }
+  .sr-only { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -133,22 +229,30 @@
 <nav class="nav" id="nav" aria-label="Primary">
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo">Rakshith<span>.</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a class="nav-cta" href="index.html#contact">Get in touch</a></li>
+      </ul>
     <a href="index.html#work" class="nav-back">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       All work
     </a>
+    </div>
   </div>
 </nav>
 
 <header class="case-hero">
-  <div class="shard-wrap sw-1" aria-hidden="true"><div class="shard"></div></div>
-  <div class="shard-wrap sw-2" aria-hidden="true"><div class="shard"></div></div>
-  <div class="container">
-    <p class="case-eyebrow">ITW · Campaign Creative</p>
+  <div class="shard-wrap sw-1" data-speed="0.25" aria-hidden="true"><div class="shard"></div></div>
+  <div class="shard-wrap sw-2" data-speed="0.4" aria-hidden="true"><div class="shard"></div></div>
+  <div class="container" data-speed="0.08">
+    <p class="case-eyebrow">ITW · Campaign Creative&nbsp;·&nbsp;2&nbsp;min&nbsp;read</p>
     <h1>Creative for a billion cricket fans</h1>
     <p class="case-deck">Match day creative and sponsorship decks for some of the loudest rooms in sport, including IPL, PSL, Asia Cup and the Rugby World Cup, turned around on deadlines measured in overs. This is where I learned to make complicated things look effortless, and to do it fast.</p>
     <dl class="case-meta">
-      <div><dt>Role</dt><dd>Sr. Creative Executive</dd></div>
+      <div><dt>Role</dt><dd>Senior Creative Executive</dd></div>
       <div><dt>Timeline</dt><dd>2017 to 2020</dd></div>
       <div><dt>Industry</dt><dd>Sport / Media</dd></div>
       <div><dt>Output</dt><dd>15+ campaigns</dd></div>
@@ -157,19 +261,23 @@
 </header>
 
 <main id="main">
-  <div class="container narrow">
+  <div class="container narrow case-layout">
+    <aside class="case-aside">
+      <nav class="toc" aria-label="On this page"><span class="toc-label">On this page</span><a href="#challenge">Challenge</a><a href="#approach">Approach</a><a href="#roster">Roster</a><a href="#outcome">Outcome</a></nav>
+    </aside>
+    <div class="case-content">
     <section class="block reveal">
       <p class="lead">When your audience runs into the hundreds of millions and the deadline is measured in overs, you can't afford to be precious. The work has to be sharp, on brand and out the door.</p>
     </section>
 
-    <section class="block reveal">
+    <section class="block reveal" id="challenge">
       <p class="kicker">The challenge</p>
       <h2>Enormous stakes, impossible clock</h2>
       <p>Live sport doesn't wait for anyone. Every match throws up new moments by the minute, and each one is a chance for a brand to show up, but only if the creative is ready before the moment passes. Multiply that across tournaments running at the same time, several sponsors and every social format, and the real design problem becomes volume.</p>
       <p>The obvious trap is giving up quality for speed, or missing the deadline to protect quality. My job was to avoid making that trade at all.</p>
     </section>
 
-    <section class="block reveal">
+    <section class="block reveal" id="approach">
       <p class="kicker">The approach</p>
       <h2>Systemise the speed</h2>
       <ol class="steps">
@@ -178,13 +286,23 @@
         <li><h3>Turn it around live</h3><p>Produced match day creative and social content in step with live results, on deadlines that left no room for a second pass.</p></li>
         <li><h3>Pitch the partnership</h3><p>Designed sponsorship and sales decks that helped close brand partnerships for events around the world.</p></li>
       </ol>
+      <figure class="fig" role="img" aria-label="One match day template adapted into four formats: square post, portrait post, story and landscape banner. The score bar, headline and sponsor slot stay in the same place. Logo, colour, type and clear space are locked.">
+        <div class="fmt" aria-hidden="true">
+          <div class="fmt-item"><div class="fmt-art" style="aspect-ratio:1 / 1;width:100%"><i class="sc"></i><i class="hl"></i><i class="sp"></i></div><b>Feed post</b><span>1:1</span></div>
+          <div class="fmt-item"><div class="fmt-art" style="aspect-ratio:4 / 5;width:100%"><i class="sc"></i><i class="hl"></i><i class="sp"></i></div><b>Portrait post</b><span>4:5</span></div>
+          <div class="fmt-item"><div class="fmt-art" style="aspect-ratio:9 / 16;width:78%"><i class="sc"></i><i class="hl"></i><i class="sp"></i></div><b>Story</b><span>9:16</span></div>
+          <div class="fmt-item"><div class="fmt-art" style="aspect-ratio:16 / 9;width:100%"><i class="sc"></i><i class="hl"></i><i class="sp"></i></div><b>Banner</b><span>16:9</span></div>
+        </div>
+        <div class="fmt-lock" aria-hidden="true">Locked in every format: <em>Logo</em><em>Colour</em><em>Type</em><em>Clear space</em></div>
+        <figcaption>How one template becomes every format. Score bar, headline and sponsor slot keep their place, so each asset starts most of the way there. Illustration only.</figcaption>
+      </figure>
     </section>
 
     <section class="block reveal">
       <p class="pullquote">Speed or quality? The job was to refuse to pick one.</p>
     </section>
 
-    <section class="block reveal">
+    <section class="block reveal" id="roster">
       <p class="kicker">The roster</p>
       <h2>Where the work ran</h2>
       <div class="roster">
@@ -192,7 +310,7 @@
       </div>
     </section>
 
-    <section class="block reveal">
+    <section class="block reveal" id="outcome">
       <p class="kicker">The outcome</p>
       <h2>Proof under pressure</h2>
       <div class="outcome-grid">
@@ -203,43 +321,58 @@
     </section>
 
     <section class="block reveal">
-      <p class="block-tail" style="font-size:17px;color:var(--fg-soft)">It's a very different world from healthcare software, but the skill is the same: take something huge and chaotic, and make it land clean and fast. That idea runs through everything I design.</p>
+      <p class="block-tail" style="font-size:17px;color:var(--fg-soft)">It's a very different world from healthcare websites and web apps, but the skill is the same: take something huge and chaotic, and make it land clean and fast. That idea runs through everything I design.</p>
     </section>
+    <section class="block reveal">
+      <div class="cta">
+        <h2>Need creative that holds up under pressure?</h2>
+        <p>I'm open to Senior and Lead roles, and always happy to talk through how I'd approach a problem.</p>
+        <div class="cta-actions">
+          <a class="primary" href="mailto:rakshithrhavali@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>Email me</a>
+          <a href="https://www.linkedin.com/in/rakshithrhavali" target="_blank" rel="noopener noreferrer">LinkedIn<span class="ext" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+          <button type="button" class="copy-email" data-email="rakshithrhavali@gmail.com">Copy email</button>
+          <span class="sr-only" id="copy-status" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+    </div>
   </div>
 
   <div class="container">
-    <nav class="next" aria-label="Next case study">
-      <a href="case-design-systems.html">
+    <nav class="next" aria-label="More case studies">
+      <a class="prev" href="case-clinical-ux.html">
+        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
         <span>
-          <span class="next-label">Next case study</span>
+          <span class="next-label">Previous</span>
+          <h3>Clinical complexity, made obvious</h3>
+        </span>
+      </a>
+      <a class="fwd" href="case-design-systems.html">
+        <span>
+          <span class="next-label">Next</span>
           <h3>One design language across every healthcare platform</h3>
         </span>
         <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
     </nav>
     <div class="footer-line">
-      <span>© 2026 Rakshith Havali · Bengaluru, India</span>
-      <a href="index.html#work" style="color:var(--fg-soft)">← Back to all work</a>
+      <span>© <span class="year">2026</span> Rakshith Havali · Bengaluru, India</span>
+      <span class="footer-links"><a href="index.html#work">← All work</a><a href="mailto:rakshithrhavali@gmail.com">Email</a><a href="https://www.linkedin.com/in/rakshithrhavali" target="_blank" rel="noopener noreferrer">LinkedIn<span class="ext" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></span>
     </div>
   </div>
 </main>
 
-<button class="to-top" id="to-top" aria-label="Back to top">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-</button>
 
 <script>
 (function () {
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var nav = document.getElementById('nav');
   var progress = document.getElementById('progress');
-  var toTop = document.getElementById('to-top');
   var ticking = false;
   function onScroll() {
     nav.classList.toggle('scrolled', window.scrollY > 40);
     var max = document.documentElement.scrollHeight - window.innerHeight;
     progress.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
-    if (toTop) toTop.classList.toggle('show', window.scrollY > 600);
     ticking = false;
   }
   window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
@@ -253,8 +386,52 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     targets.forEach(function (el) { io.observe(el); });
   }
-  if (toTop) toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); });
+  var plx = reduced ? [] : document.querySelectorAll('[data-speed]');
+  // Scroll parallax: each [data-speed] element drifts once its parent reaches mid-screen
+  if (plx.length) {
+    var plxTick = false;
+    function parallax() {
+      var vh = window.innerHeight, y = window.scrollY;
+      plx.forEach(function (el) {
+        var r = el.parentElement.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh + 200) return;
+        var rest = Math.max(0, r.top + y + r.height / 2 - vh / 2);
+        el.style.translate = '0 ' + ((y - rest) * el.dataset.speed).toFixed(1) + 'px';
+      });
+      plxTick = false;
+    }
+    window.addEventListener('scroll', function () { if (!plxTick) { requestAnimationFrame(parallax); plxTick = true; } }, { passive: true });
+    window.addEventListener('resize', parallax);
+    parallax();
+  }
+  var copyBtn = document.querySelector('.copy-email');
+  // copy email for visitors without a mail app; falls back to showing the address
+  if (copyBtn) copyBtn.addEventListener('click', function () {
+    var email = copyBtn.dataset.email, status = document.getElementById('copy-status');
+    function done(msg) { copyBtn.textContent = msg; status.textContent = msg; setTimeout(function () { copyBtn.textContent = 'Copy email'; }, 2400); }
+    if (navigator.clipboard) navigator.clipboard.writeText(email).then(function () { done('Email copied'); }, function () { done(email); });
+    else done(email);
+  });
 })();
+</script>
+<script>
+  document.querySelectorAll('.year').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+
+  // highlight the on-page link for the section being read
+  (function () {
+    var links = document.querySelectorAll('.toc a');
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    var map = {};
+    links.forEach(function (a) { var t = document.querySelector(a.getAttribute('href')); if (t) map[t.id] = a; });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        links.forEach(function (a) { a.removeAttribute('aria-current'); });
+        map[e.target.id].setAttribute('aria-current', 'true');
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    Object.keys(map).forEach(function (id) { spy.observe(document.getElementById(id)); });
+  })();
 </script>
 </body>
 </html>
